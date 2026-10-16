@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="仕事16タイプ診断">
+<meta property="og:description" content="12問・約1分。あなたの働き方のタイプと、最高の相棒になるタイプがわかる。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://riudomura.github.io/worktype16/">
+<meta property="og:image" content="https://riudomura.github.io/worktype16/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://riudomura.github.io/worktype16/ogp.png">
+<style>[hidden]{display:none!important}body{margin:0}</style><title>仕事16タイプ診断</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="12問・約1分。あなたの働き方のタイプと、最高の相棒になるタイプがわかる。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: 1カラムのスマホ縦長。診断結果は「社員証」—巨大なタイプ名＋承認印。 */
+:root{
+  --paper:#F2F5FA; --card:#FFFFFF; --ink:#14213D; --muted:#5E6B84; --line:#DCE3EE;
+  --rose:#2F5BEA; --rose-soft:#E3EAFD;
+  --c-li:#2F5BEA; --c-lm:#0E8A6A; --c-si:#D9822B; --c-sm:#8A4FD0;
+  --f-display:"Dela Gothic One","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F1626; --card:#18223A; --ink:#E9EEF8; --muted:#9AA8C2; --line:#2A3654;
+  --rose:#6C8DFF; --rose-soft:#1E2B52;
+  --c-li:#6C8DFF; --c-lm:#3CC39C; --c-si:#F2A65A; --c-sm:#B489F0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F1626; --card:#18223A; --ink:#E9EEF8; --muted:#9AA8C2; --line:#2A3654;
+  --rose:#6C8DFF; --rose-soft:#1E2B52;
+  --c-li:#6C8DFF; --c-lm:#3CC39C; --c-si:#F2A65A; --c-sm:#B489F0; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.8;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:600px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:400}
+p{margin:0}
+button,a.btn{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+
+.top{display:flex;justify-content:space-between;align-items:center;padding-block:16px;font-size:13px;color:var(--muted)}
+.logo{font-family:var(--f-display);color:var(--ink);font-size:15px;letter-spacing:.04em;background:none;border:0;padding:0}
+.logo b{color:var(--rose);font-weight:400}
+
+.hero{padding-block:24px 8px;display:grid;gap:20px}
+.eyebrow{font-size:13px;letter-spacing:.12em;color:var(--rose);font-weight:700}
+.hero h1{font-family:var(--f-display);font-size:clamp(34px,9vw,54px);line-height:1.2}
+.hero h1 em{font-style:normal;color:var(--rose)}
+.lead{color:var(--muted);max-width:34em}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.meta span b{color:var(--ink);font-weight:700}
+.btn-main{display:block;width:100%;border:0;border-radius:999px;background:var(--rose);color:#fff;
+  font-family:var(--f-display);font-size:20px;padding:18px;letter-spacing:.06em;text-align:center;text-decoration:none;
+  box-shadow:0 6px 0 color-mix(in srgb,var(--rose) 55%,#000);transition:transform .08s,box-shadow .08s}
+.btn-main:active{transform:translateY(4px);box-shadow:0 2px 0 color-mix(in srgb,var(--rose) 55%,#000)}
+.pair-banner{border:2px dashed var(--rose);border-radius:16px;padding:14px 16px;background:var(--rose-soft);font-size:15px}
+.pair-banner b{color:var(--rose)}
+
+.axes-intro{display:grid;gap:8px;margin-top:8px}
+.axes-intro div{display:grid;grid-template-columns:2.2em 1fr auto 1fr 2.2em;align-items:center;gap:6px;font-size:13px}
+.axes-intro .k{font-family:var(--f-display);font-size:18px;text-align:center}
+.axes-intro .r{text-align:right}
+.axes-intro .vs{color:var(--muted);font-size:11px}
+
+.section-h{font-family:var(--f-display);font-size:22px;margin-block:40px 6px}
+.section-sub{color:var(--muted);font-size:14px;margin-bottom:14px}
+.grid16{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:520px){.grid16{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tcell{border:0;border-radius:14px;padding:12px 10px;text-align:left;color:#fff;background:var(--tc);display:grid;gap:2px;min-height:92px;align-content:start;transition:transform .12s}
+.tcell:hover{transform:translateY(-2px)}
+.tcell .code{font-family:var(--f-display);font-size:12px;letter-spacing:.14em;opacity:.85}
+.tcell .nm{font-weight:700;font-size:14px;line-height:1.4}
+.tcell.me{outline:3px solid var(--ink);outline-offset:2px}
+
+.quiz{padding-block:16px;display:grid;gap:24px}
+.prog{display:grid;gap:8px}
+.prog-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--rose);border-radius:99px;transition:width .25s}
+.qnum{font-family:var(--f-display);font-size:15px;color:var(--rose);letter-spacing:.08em}
+.qtext{font-family:var(--f-display);font-size:clamp(24px,6.4vw,32px);line-height:1.45;min-height:3em}
+.opts{display:grid;gap:12px}
+.opt{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;padding:18px 18px;text-align:left;font-size:17px;font-weight:500;line-height:1.55;display:flex;gap:12px;align-items:center;transition:border-color .12s,transform .08s}
+.opt:hover{border-color:var(--rose)}
+.opt:active{transform:scale(.985)}
+.opt .n{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--rose-soft);color:var(--rose);font-family:var(--f-display);font-size:14px}
+.opt.picked{border-color:var(--rose);background:var(--rose-soft)}
+.back{justify-self:start;border:0;background:none;color:var(--muted);font-size:14px;padding:6px 0;text-decoration:underline}
+.back:disabled{visibility:hidden}
+
+.res-head{position:relative;padding-block:24px 8px;display:grid;gap:10px}
+.res-label{font-size:14px;font-weight:700;color:var(--muted)}
+.res-name{font-family:var(--f-display);font-size:clamp(36px,10.5vw,62px);line-height:1.15;color:var(--tc)}
+.res-catch{font-size:19px;font-weight:700}
+.stamp{position:absolute;right:0;top:12px;width:84px;height:84px;border:3px solid var(--rose);border-radius:50%;color:var(--rose);
+  display:grid;place-items:center;font-family:var(--f-display);font-size:13px;line-height:1.25;text-align:center;transform:rotate(-12deg);opacity:.9}
+.stamp b{font-weight:400;font-size:20px;display:block;letter-spacing:.06em}
+.res-head.has-stamp{padding-right:92px}
+@media (max-width:420px){.res-head.has-stamp{padding-right:0}.stamp{width:68px;height:68px;font-size:11px;top:-4px}.stamp b{font-size:16px}}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:3px 12px 3px 4px;background:var(--card);border:1px solid var(--line);font-size:13px}
+.chip b{font-family:var(--f-display);font-weight:400;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--tc);color:#fff;font-size:12px}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:12px;margin-top:16px}
+.panel h3{font-family:var(--f-display);font-size:18px}
+.axisbars{display:grid;gap:14px}
+.ab-row{display:grid;gap:4px}
+.ab-lbl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.ab-lbl .on{color:var(--ink);font-weight:700}
+.ab-track{position:relative;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.ab-track i{position:absolute;top:0;bottom:0;background:var(--tc);border-radius:99px}
+.aruaru{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.aruaru li{padding-left:1.4em;position:relative}
+.aruaru li::before{content:"";position:absolute;left:0;top:.62em;width:.6em;height:.6em;border-radius:50%;background:var(--tc)}
+.jobs{display:flex;flex-wrap:wrap;gap:8px}
+.jobs span{border-radius:10px;padding:4px 12px;background:var(--paper);border:1px solid var(--line);font-weight:700;font-size:14px}
+.advice{border-left:4px solid var(--tc);padding-left:12px;font-weight:500}
+
+.match{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:420px){.match{grid-template-columns:1fr}}
+.mcard{border:0;border-radius:16px;padding:14px;background:var(--paper);color:var(--ink);text-align:left;display:grid;gap:4px;border-top:6px solid var(--tc)}
+.mcard .k{font-size:12px;font-weight:700;color:var(--muted)}
+.mcard .nm{font-family:var(--f-display);font-size:18px;line-height:1.35;color:var(--tc)}
+.mcard .sc{font-family:var(--f-display);font-size:28px;font-variant-numeric:tabular-nums}
+.mcard .sc small{font-size:13px;color:var(--muted)}
+.mcard .why{font-size:13px;color:var(--muted);line-height:1.6}
+.mcard .go{font-size:12px;color:var(--rose);font-weight:700}
+
+.compat-box{display:grid;gap:12px}
+.compat-pair{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center}
+.compat-pair .p{font-weight:700;color:var(--tc)}
+.compat-score{font-family:var(--f-display);font-size:56px;line-height:1;text-align:center;color:var(--rose);font-variant-numeric:tabular-nums}
+.compat-score small{font-size:20px}
+.compat-tier{text-align:center;font-weight:700}
+.reasons{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px}
+.reasons li{display:flex;gap:8px}
+.reasons .mk{flex:none;font-weight:700;width:1.2em;text-align:center}
+.reasons .good .mk{color:var(--c-lm)}
+.reasons .bad .mk{color:var(--c-si)}
+select{font:inherit;width:100%;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink)}
+
+.share{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sbtn{border:0;border-radius:14px;padding:12px 6px;font-weight:700;font-size:14px;text-align:center;text-decoration:none;color:#fff;display:block}
+.sbtn.x{background:#111}
+.sbtn.line{background:#06C755}
+.sbtn.copy{background:var(--ink);color:var(--paper)}
+.btn-sub{border:2px solid var(--rose);background:transparent;color:var(--rose);border-radius:999px;padding:12px;font-weight:700;width:100%}
+.note{font-size:13px;color:var(--muted)}
+.shareimg{width:100%;border-radius:12px;border:1px solid var(--line)}
+.copied{font-size:13px;color:var(--rose);min-height:1.2em}
+.linkbox{font-size:12px;word-break:break-all;background:var(--paper);border-radius:8px;padding:8px;user-select:all}
+.sister{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding:16px 20px;border-radius:20px;background:#D93367;color:#fff;text-decoration:none}
+.sister b{font-family:var(--f-display);font-weight:400;font-size:18px;display:block}
+.sister span{font-size:13px;opacity:.9}
+.sister i{font-style:normal;font-family:var(--f-display);font-size:22px}
+.foot{margin-top:24px;font-size:12px;color:var(--muted);text-align:center}
+
+@keyframes pop{from{transform:translateY(8px);opacity:.3}to{transform:none;opacity:1}}
+.anim{animation:pop .35s ease-out}
+@keyframes stamp{0%{transform:rotate(-12deg) scale(1.8);opacity:0}70%{transform:rotate(-12deg) scale(.95);opacity:1}100%{transform:rotate(-12deg) scale(1)}}
+.stamp.go{animation:stamp .45s cubic-bezier(.2,.8,.3,1.2)}
+@media (prefers-reduced-motion:reduce){.anim,.stamp.go{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <button class="logo" id="logo" type="button">仕事<b>16</b>タイプ診断</button>
+    <span>全12問・約1分</span>
+  </header>
+
+  <main id="v-home">
+    <section class="hero">
+      <div class="eyebrow">WORK STYLE CHECK</div>
+      <h1>あなたの働き方は、<br><em>16タイプ</em>のどれ？</h1>
+      <p class="lead">「仕切るか、支えるか」「アイデアか、手順か」。4つの軸で働き方のクセを判定して、最高の相棒になるタイプまでわかります。</p>
+      <div class="pair-banner" id="pairBanner" hidden></div>
+      <div class="meta"><span>質問 <b>12問</b></span><span>所要 <b>約1分</b></span><span>登録 <b>なし</b></span></div>
+      <button class="btn-main" id="startBtn" type="button">診断をはじめる</button>
+      <div class="axes-intro" id="axesIntro"></div>
+    </section>
+
+    <h2 class="section-h">16タイプ図鑑</h2>
+    <p class="section-sub">タップすると、そのタイプの働き方と相性がよめます。</p>
+    <div class="grid16" id="gridHome"></div>
+  </main>
+
+  <main id="v-quiz" hidden>
+    <section class="quiz">
+      <div class="prog">
+        <div class="prog-row"><span id="qCount">1 / 12</span><span id="qAxis"></span></div>
+        <div class="bar"><i id="qBar"></i></div>
+      </div>
+      <div id="qBody" class="anim">
+        <div class="qnum" id="qNum">Q1</div>
+        <h2 class="qtext" id="qText"></h2>
+      </div>
+      <div class="opts" id="qOpts"></div>
+      <button class="back" id="backBtn" type="button">ひとつ前の質問にもどる</button>
+    </section>
+  </main>
+
+  <main id="v-result" hidden></main>
+
+  <a class="sister" href="https://riudomura.github.io/lovetype16/" target="_blank" rel="noopener">
+    <div><span>こちらもどうぞ</span><b>恋愛16タイプ診断</b></div><i>→</i>
+  </a>
+  <p class="foot">仕事16タイプ診断 ・ 診断結果はエンタメとしてお楽しみください</p>
+</div>
+
+<script>
+// ===== データ =====
+const AXES = [
+  {k:['L','S'], l:['仕切る','支える'],        d:'チームでの立ち位置'},
+  {k:['I','M'], l:['アイデア派','手順派'],     d:'仕事の進め方'},
+  {k:['T','O'], l:['チームで','ひとりで'],     d:'集中できる環境'},
+  {k:['R','H'], l:['数字で判断','気持ちで判断'], d:'決めるときの基準'},
+];
+
+const QUESTIONS = [
+  {a:0, q:'新しいプロジェクトが始まった。', o:[{t:'自分から仕切り役に手を挙げる',v:0},{t:'誰かが決めた方針を全力で支える',v:1}]},
+  {a:1, q:'仕事のやり方、どっちが好き？',   o:[{t:'決まった手順を確実にこなしたい',v:1},{t:'新しいやり方をどんどん試したい',v:0}]},
+  {a:2, q:'いちばん集中できるのは？',       o:[{t:'みんなと話しながら進めるとき',v:0},{t:'ひとりで黙々と作業するとき',v:1}]},
+  {a:3, q:'大事な判断の決め手は？',         o:[{t:'関わる人の気持ちや空気感',v:1},{t:'データと数字',v:0}]},
+  {a:0, q:'会議で意見が割れた。',           o:[{t:'みんなの意見を整理する役に回る',v:1},{t:'自分が決めて前に進める',v:0}]},
+  {a:1, q:'企画書を書くなら？',             o:[{t:'ワクワクするアイデアを詰め込む',v:0},{t:'実現できる根拠をしっかり固める',v:1}]},
+  {a:2, q:'仕事で困ったとき、まずは？',     o:[{t:'自分で調べられるところまで調べる',v:1},{t:'すぐ誰かに相談する',v:0}]},
+  {a:3, q:'後輩がミスをした。',             o:[{t:'原因と再発防止策を一緒に考える',v:0},{t:'まず落ち込んでないかフォローする',v:1}]},
+  {a:0, q:'理想のポジションは？',           o:[{t:'先頭に立つリーダー',v:0},{t:'エースを支える右腕',v:1}]},
+  {a:1, q:'「前例がない」と言われたら？',   o:[{t:'いったん立ち止まって慎重になる',v:1},{t:'むしろやる気が出る',v:0}]},
+  {a:2, q:'理想の職場は？',                 o:[{t:'チームの一体感がある職場',v:0},{t:'ひとりひとりの裁量が大きい職場',v:1}]},
+  {a:3, q:'仕事でいちばんうれしい瞬間は？', o:[{t:'「ありがとう」と言われたとき',v:1},{t:'成果が数字ではっきり出たとき',v:0}]},
+];
+
+const TYPES = {
+  LITR:{n:'旗振り革命家型', c:'ビジョンで、人を動かす',
+    d:'新しいことを自分から仕掛け、チームを巻き込んで数字で結果を出す。「こうしたら面白い」を語らせたら止まらない。会社にひとりいると、空気が変わる人。',
+    r:['会議の最後に「で、いつやる？」と言う','ホワイトボードを見ると書きたくなる','新しいツールを誰より先に導入している'],
+    j:['新規事業','プロジェクトリーダー','起業'],
+    ad:'アイデアを形にしてくれる「手順派」の相棒を見つけると、実現スピードが一気に上がります。'},
+  LITH:{n:'熱血キャプテン型', c:'みんなで、勝ちにいこう',
+    d:'先頭に立ってチームを盛り上げ、新しい挑戦に仲間を連れていく。判断の軸は「みんなが納得できるか」。数字より、チームの熱量で結果を出す人。',
+    r:['打ち上げの幹事は基本的に自分','「いけるいける！」が口ぐせ','落ち込んでいる人を見つけるのが早い'],
+    j:['チームリーダー','営業マネージャー','イベント企画'],
+    ad:'熱量に「根拠」を添えると、慎重な人もついてきてくれます。'},
+  LIOR:{n:'孤高の開拓者型', c:'まだ誰もやってない道を行く',
+    d:'自分で方向を決め、ひとりで新しい道を切りひらく。判断は冷静で論理的。群れるより、結果で黙らせたいタイプ。気づけば社内で一番詳しい分野を持っている。',
+    r:['「とりあえず作ってみました」と完成品を持ってくる','会議より資料を読むほうが早いと思っている','休日に仕事の勉強をしている'],
+    j:['エンジニア','研究開発','戦略コンサル'],
+    ad:'途中経過をこまめに共有すると、まわりの協力が得られて成果が大きくなります。'},
+  LIOH:{n:'情熱のクリエイター型', c:'心が動くものしか、作りたくない',
+    d:'自分の感性で方向を決め、ひとりで深く作り込む。「誰かの心に届くか」が判断基準。こだわりが強いぶん、出来上がったものには人を惹きつける力がある。',
+    r:['締め切り前夜にいちばん集中力が上がる','「なんか違う」で全部作り直す','好きな仕事と嫌いな仕事のパフォーマンス差がすごい'],
+    j:['デザイナー','クリエイター','ブランド担当'],
+    ad:'こだわりたい部分と任せていい部分を分けると、もっと多くの作品を世に出せます。'},
+  LMTR:{n:'敏腕マネージャー型', c:'仕組みで、チームを勝たせる',
+    d:'チームをまとめ、確実な手順と数字で目標まで連れていく。計画・進捗管理・振り返りが得意で、任せると安心感が段違い。組織の背骨になる人。',
+    r:['ガントチャートを見ると落ち着く','「数字で言うと？」と聞きがち','タスク管理ツールの使い方を全員に教えている'],
+    j:['プロジェクトマネージャー','管理職','経営企画'],
+    ad:'ときどき計画の外にあるアイデアを拾ってみると、チームの伸びしろが広がります。'},
+  LMTH:{n:'面倒見のいい親方型', c:'ついてこい、悪いようにはしない',
+    d:'先頭に立ちながら、メンバーひとりひとりを気にかける。やり方は堅実で、決めたことは最後までやり切る。後輩から「この人の下で働きたい」と言われる人。',
+    r:['後輩のランチ代をよく出している','困っている人がいると仕事を巻き取る','飲み会で人生相談を受けがち'],
+    j:['店長','現場リーダー','人事・教育担当'],
+    ad:'ぜんぶ抱え込まず、任せることも育てることだと思うと楽になります。'},
+  LMOR:{n:'一匹狼のプロ型', c:'結果で語る、それだけ',
+    d:'自分のやり方を確立し、ひとりで確実に結果を出す。判断は数字とロジック。ムダを嫌い、効率を極める。頼まれた仕事のクオリティは常に安定している。',
+    r:['定時に帰るのに成果は一番','雑談は少なめ、でも質問すると全部答えてくれる','自作のショートカットや仕組みが大量にある'],
+    j:['専門職','エンジニア','経理・財務'],
+    ad:'自分のノウハウを人に教えると、評価がもう一段上がります。'},
+  LMOH:{n:'背中で見せる師匠型', c:'言葉より、仕事ぶりで伝える',
+    d:'自分の流儀を持ち、ひとりで黙々と質の高い仕事をする。そのうえで、まわりの人のことはちゃんと見ている。気づけば後輩たちがやり方を真似している人。',
+    r:['教えるより「見とけ」派','ここぞというときにさりげなく助けてくれる','道具や机まわりにこだわりがある'],
+    j:['職人・技術職','医療・看護','専門講師'],
+    ad:'たまに言葉でほめたり教えたりすると、後輩の成長スピードが変わります。'},
+  SITR:{n:'頼れる参謀型', c:'リーダーの横で、勝ち筋を描く',
+    d:'前に立つより、リーダーの隣でアイデアと分析を出すのが得意。チームで議論しながら、数字の裏付けで最善手を見つける。この人がいると会議の質が上がる。',
+    r:['「ちなみに、こういう案もあります」と3案出す','リーダーの考えを先回りして資料にしている','データを見ながら雑談するのが好き'],
+    j:['企画','マーケター','経営補佐'],
+    ad:'たまには自分が決める側に回ると、アイデアの実現度が上がります。'},
+  SITH:{n:'ムードメーカー型', c:'この人がいると、職場が明るい',
+    d:'場の空気を読み、みんなが話しやすい雰囲気をつくる。アイデアは豊富で、チームで盛り上がりながら形にしていくのが得意。いないと静かすぎると言われる人。',
+    r:['新人に最初に話しかけるのはだいたい自分','ブレストで一番発言数が多い','誕生日のお祝いを企画している'],
+    j:['広報・PR','接客・販売','チーム企画'],
+    ad:'アイデアの「その後」まで見届けると、信頼がぐっと増えます。'},
+  SIOR:{n:'ひらめきの研究者型', c:'答えは、だいたい思いつきの先にある',
+    d:'ひとりで考え込んで、誰も思いつかない解決策を出す。発想は自由、検証は論理的。目立たないけれど、困ったときに頼られるアイデアの源泉。',
+    r:['お風呂でいいアイデアを思いつく','気になったことを調べ始めると止まらない','「それ、もっといい方法ありますよ」と言いがち'],
+    j:['リサーチャー','データ分析','エンジニア'],
+    ad:'ひらめきを早めに人に話すと、形になるまでが早くなります。'},
+  SIOH:{n:'自由なアーティスト型', c:'自分のペースで、いいものを',
+    d:'ルールに縛られず、ひとりで感性を活かした仕事をする。人の気持ちに寄り添った表現が得意。のびのびできる環境だと、驚くほどの成果を出す。',
+    r:['気分が乗った日の生産性がすごい','細かい報連相が苦手','ほめられると3倍がんばれる'],
+    j:['イラストレーター','ライター','ハンドメイド・クリエイター'],
+    ad:'自分に合う締め切りの作り方を見つけると、才能をもっと出せます。'},
+  SMTR:{n:'段取りの達人型', c:'あの人に任せれば、なんとかなる',
+    d:'チームの裏側で、スケジュール・調整・確認を正確にこなす。判断は冷静で、ミスを未然に防ぐのが得意。この人が休むとプロジェクトが止まる。',
+    r:['誰より先に会議室を予約している','チェックリストが大好き','「念のため確認ですが」が口ぐせ'],
+    j:['事務・総務','プロジェクト推進','秘書'],
+    ad:'自分の段取り力をもっと前に出すと、リーダー候補として見られます。'},
+  SMTH:{n:'みんなの安全基地型', c:'困ったら、とりあえずここに来て',
+    d:'チームの一員として、まわりを支えることに喜びを感じる。手順を守って確実に仕事をしつつ、人の変化にすぐ気づく。職場の心理的安全性そのもの。',
+    r:['お菓子を配っているのはだいたい自分','相談されることが多いのに、自分は相談しない','「無理しないでね」をよく言う'],
+    j:['人事・労務','カスタマーサポート','医療・福祉'],
+    ad:'自分が「助けて」と言えると、チームはもっと強くなります。'},
+  SMOR:{n:'正確無比の職人型', c:'ミスゼロが、いちばんのこだわり',
+    d:'ひとりで黙々と、決められた仕事を正確に仕上げる。数字や細部の違いにすぐ気づく。派手さはないけれど、この人のチェックを通れば安心と言われる。',
+    r:['誤字を見つけるのが異常に早い','マニュアルを自分で作り直している','急な予定変更が苦手'],
+    j:['経理','品質管理','データ入力・分析'],
+    ad:'正確さを武器に「仕組みづくり」まで担当すると、価値がさらに上がります。'},
+  SMOH:{n:'コツコツ努力家型', c:'気づいたら、いちばん遠くまで来てる',
+    d:'自分のペースを守り、決めたことを毎日積み重ねる。人に優しく、頼まれごとを断れない一面も。時間はかかっても、最後には一番信頼される人。',
+    r:['資格の勉強をこっそり続けている','頼まれた仕事は期限の前日に終わっている','目立つのは苦手'],
+    j:['専門職','図書館・研究補助','バックオフィス'],
+    ad:'やってきた努力を少しだけアピールすると、正当に評価されます。'},
+};
+const ORDER = Object.keys(TYPES);
+const CODE_RE = /^[LS][IM][TO][RH]$/;
+const IMG_COL = { LI:'#2F5BEA', LM:'#0E8A6A', SI:'#D9822B', SM:'#8A4FD0' };
+const STORE = 'shigoto16_';
+
+// ===== ロジック =====
+const flip = (ch,i) => AXES[i].k[0]===ch ? AXES[i].k[1] : AXES[i].k[0];
+const bestOf  = c => flip(c[0],0)+flip(c[1],1)+c[2]+c[3];
+const worstOf = c => c[0]+c[1]+flip(c[2],2)+flip(c[3],3);
+function score(a,b){
+  let s=5;
+  s += a[0]!==b[0]?25:10;
+  s += a[1]!==b[1]?20:12;
+  s += a[2]===b[2]?25:8;
+  s += a[3]===b[3]?25:12;
+  return s;
+}
+function tier(s){
+  if(s>=90) return '最強のバディ';
+  if(s>=78) return 'いいチームになれる';
+  if(s>=65) return '役割を分ければうまくいく';
+  return 'お互いが成長できる相性';
+}
+function reasons(a,b){
+  const out=[];
+  if(a[0]!==b[0]) out.push([1,'引っぱる人と支える人。役割分担が自然に決まる']);
+  else out.push([0, a[0]==='L'?'どちらも仕切りたくて、主導権争いになりやすい':'どちらも一歩引いて、決める人がいなくなりがち']);
+  if(a[1]!==b[1]) out.push([1,'アイデアを出す人と形にする人。企画が実現まで進む']);
+  else out.push([0, a[1]==='I'?'アイデアは尽きないけど、詰めが甘くなりがち':'確実だけど、新しいことに手を出しにくい']);
+  if(a[2]===b[2]) out.push([1, a[2]==='T'?'どちらも話しながら進めたいので、連携がスムーズ':'お互いの集中を邪魔しないので、気持ちよく働ける']);
+  else out.push([0,'相談したい人と一人で進めたい人で、報連相の温度差が出やすい']);
+  if(a[3]===b[3]) out.push([1, a[3]==='R'?'判断の基準が同じで、話が早い':'人を大事にする価値観が同じで、信頼しあえる']);
+  else out.push([0,'数字の人と気持ちの人で、判断がぶつかることも']);
+  return out;
+}
+const fam = c => '--c-'+c.slice(0,2).toLowerCase();
+const tcVar = c => `var(${fam(c)})`;
+
+// ===== 状態 =====
+let answers = [], qi = 0, pairFrom = null, mine = null, lastPct = null;
+try{ mine = localStorage.getItem(STORE+'mine'); if(!CODE_RE.test(mine||'')) mine=null; }catch(e){}
+try{ lastPct = JSON.parse(localStorage.getItem(STORE+'pct')||'null'); }catch(e){}
+
+const $ = id => document.getElementById(id);
+const SITE = () => location.href.split('#')[0].split('?')[0];
+const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+function show(view){
+  for(const v of ['home','quiz','result']) $('v-'+v).hidden = v!==view;
+  window.scrollTo(0,0);
+}
+
+function renderGrid(el, highlight){
+  el.innerHTML = ORDER.map(c=>`
+    <button class="tcell${c===highlight?' me':''}" type="button" data-code="${c}" style="--tc:${tcVar(c)}">
+      <span class="code">${c}</span><span class="nm">${TYPES[c].n}</span>
+    </button>`).join('');
+  el.querySelectorAll('.tcell').forEach(b=>b.onclick=()=>openType(b.dataset.code));
+}
+function renderHome(){
+  $('axesIntro').innerHTML = AXES.map(a=>`
+    <div><span class="k">${a.k[0]}</span><span>${a.l[0]}</span><span class="vs">${a.d}</span><span class="r">${a.l[1]}</span><span class="k">${a.k[1]}</span></div>`).join('');
+  renderGrid($('gridHome'), mine);
+  const pb = $('pairBanner');
+  if(pairFrom){
+    pb.hidden=false;
+    pb.innerHTML = `<b>${TYPES[pairFrom].n}</b>の人から、相性チェックが届いています。診断すると、ふたりの仕事の相性がわかります。`;
+  } else pb.hidden=true;
+  if(mine && !pairFrom) $('startBtn').textContent='もう一度診断する';
+}
+
+function startQuiz(){ answers=[]; qi=0; show('quiz'); renderQ(); }
+function renderQ(){
+  const q = QUESTIONS[qi];
+  $('qCount').textContent = `${qi+1} / ${QUESTIONS.length}`;
+  $('qAxis').textContent = AXES[q.a].d;
+  $('qBar').style.width = (qi/QUESTIONS.length*100)+'%';
+  $('qNum').textContent = 'Q'+(qi+1);
+  $('qText').textContent = q.q;
+  const body=$('qBody'); body.classList.remove('anim'); void body.offsetWidth; body.classList.add('anim');
+  $('qOpts').innerHTML = q.o.map((o,i)=>`
+    <button class="opt${answers[qi]===o.v?' picked':''}" type="button" id="opt${i}" data-v="${o.v}"><span class="n">${i+1}</span><span>${esc(o.t)}</span></button>`).join('');
+  $('qOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.v, b));
+  $('backBtn').disabled = qi===0;
+}
+let picking=false;
+function pick(v, btn){
+  if(picking) return; picking=true;
+  answers[qi]=v; btn.classList.add('picked');
+  setTimeout(()=>{
+    picking=false;
+    if(qi < QUESTIONS.length-1){ qi++; renderQ(); } else finish();
+  }, 180);
+}
+function finish(){
+  const cnt=[0,0,0,0], tot=[0,0,0,0];
+  QUESTIONS.forEach((q,i)=>{ tot[q.a]++; if(answers[i]===0) cnt[q.a]++; });
+  const code = AXES.map((a,i)=> cnt[i]*2>tot[i] ? a.k[0] : a.k[1]).join('');
+  const pct = cnt.map((c,i)=>Math.round(c/tot[i]*100));
+  mine = code; lastPct = pct;
+  try{ localStorage.setItem(STORE+'mine',code); localStorage.setItem(STORE+'pct',JSON.stringify(pct)); }catch(e){}
+  setHash(code);
+  renderResult(code, true);
+}
+
+function openType(code){ setHash(code); renderResult(code, code===mine); }
+
+function matchCard(label, me, other){
+  const s=score(me,other), t=TYPES[other];
+  const why = reasons(me,other).filter(r=> label==='best' ? r[0]===1 : r[0]===0).slice(0,2).map(r=>r[1]).join('。');
+  return `<button class="mcard" type="button" data-code="${other}" style="--tc:${tcVar(other)}">
+    <span class="k">${label==='best'?'最高の相棒':'ぶつかりやすい'}</span>
+    <span class="nm">${t.n}</span>
+    <span class="sc">${s}<small> / 100</small></span>
+    <span class="why">${why}。</span>
+    <span class="go">このタイプを見る →</span>
+  </button>`;
+}
+function compatHTML(a,b,labelA,labelB){
+  const s=score(a,b);
+  return `<div class="compat-box">
+    <div class="compat-pair"><span class="p" style="--tc:${tcVar(a)}">${labelA}<br>${TYPES[a].n}</span><span>×</span><span class="p" style="--tc:${tcVar(b)}">${labelB}<br>${TYPES[b].n}</span></div>
+    <div class="compat-score">${s}<small>点</small></div>
+    <div class="compat-tier">${tier(s)}</div>
+    <ul class="reasons">${reasons(a,b).map(r=>`<li class="${r[0]?'good':'bad'}"><span class="mk">${r[0]?'○':'△'}</span><span>${r[1]}</span></li>`).join('')}</ul>
+  </div>`;
+}
+
+function renderResult(code, isMine){
+  const t=TYPES[code], best=bestOf(code), worst=worstOf(code);
+  const v=$('v-result');
+  v.style.setProperty('--tc', tcVar(code));
+  const chips = code.split('').map((ch,i)=>`<span class="chip"><b>${ch}</b>${AXES[i].l[AXES[i].k.indexOf(ch)]}</span>`).join('');
+
+  const pct = isMine && lastPct ? lastPct : null;
+  const bars = pct ? `<section class="panel"><h3>あなたの働き方バランス</h3><div class="axisbars">${
+    AXES.map((a,i)=>{
+      const p=pct[i], left=p>=50, w = left?p:100-p;
+      return `<div class="ab-row"><div class="ab-lbl"><span class="${left?'on':''}">${a.k[0]} ${a.l[0]}${left?' '+p+'%':''}</span><span class="${left?'':'on'}">${left?'':(100-p)+'% '}${a.l[1]} ${a.k[1]}</span></div>
+      <div class="ab-track"><i style="${left?'left:0':'right:0'};width:${w}%"></i></div></div>`;
+    }).join('')}</div></section>` : '';
+
+  const pairSec = (isMine && pairFrom) ? `<section class="panel" style="border:2px solid var(--rose)"><h3>相性チェックの結果</h3>${compatHTML(pairFrom,code,'相手','あなた')}
+    <p class="note">この結果を、相性チェックを送ってくれた人にも教えてあげてください。</p></section>` : '';
+
+  const shareText = isMine
+    ? `私の仕事タイプは【${t.n}】でした。\n最高の相棒は【${TYPES[best].n}】らしい。\n#仕事16タイプ診断`
+    : `【${t.n}】の働き方がわかりすぎる。\n#仕事16タイプ診断`;
+  const shareUrl = SITE()+'#'+code;
+  const pairUrl = SITE()+'#pair-'+code;
+
+  v.innerHTML = `
+    <section class="res-head${isMine?' has-stamp':''} anim">
+      ${isMine?'<div class="stamp go" aria-hidden="true">診断<b>完了</b></div>':''}
+      <div class="res-label">${isMine?'あなたの仕事タイプは':'仕事タイプ図鑑 ／ '+code}</div>
+      <h1 class="res-name">${t.n}</h1>
+      <p class="res-catch">「${t.c}」</p>
+      <div class="chips">${chips}</div>
+    </section>
+
+    ${!isMine?`<p style="margin-top:16px"><button class="btn-main" type="button" data-act="start">${mine?'もう一度診断する':'自分のタイプを診断する'}</button></p>`:''}
+    ${pairSec}
+    ${bars}
+
+    <section class="panel"><h3>${t.n}の働き方</h3><p>${t.d}</p></section>
+    <section class="panel"><h3>${t.n}あるある</h3><ul class="aruaru">${t.r.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section class="panel"><h3>向いている仕事・役割</h3><div class="jobs">${t.j.map(x=>`<span>${x}</span>`).join('')}</div></section>
+    <section class="panel"><h3>もっと活躍するヒント</h3><p class="advice">${t.ad}</p></section>
+
+    <section class="panel"><h3>同僚・上司との相性</h3><div class="match">${matchCard('best',code,best)}${matchCard('worst',code,worst)}</div></section>
+
+    <section class="panel">
+      <h3>${isMine?'結果をシェアする':'このタイプをシェアする'}</h3>
+      <div class="share">
+        <a class="sbtn x" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}">Xでポスト</a>
+        <a class="sbtn line" target="_blank" rel="noopener" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+'\n'+shareUrl)}">LINEで送る</a>
+        <button class="sbtn copy" type="button" data-copy="${esc(shareUrl)}">リンクをコピー</button>
+      </div>
+      <div class="copied" aria-live="polite"></div>
+      ${isMine?`<button class="btn-sub" type="button" data-act="img">シェア用の画像をつくる</button><div id="imgOut"></div>`:''}
+    </section>
+
+    ${isMine?`<section class="panel">
+      <h3>同僚や上司と相性チェック</h3>
+      <p class="note">このリンクを送って相手が診断すると、ふたりの仕事の相性が相手の画面に出ます。チームのSlackに貼るのもおすすめです。</p>
+      <div class="linkbox">${esc(pairUrl)}</div>
+      <div class="share" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <a class="sbtn line" target="_blank" rel="noopener" href="https://line.me/R/msg/text/?${encodeURIComponent('仕事の相性、診断してみて\n'+pairUrl)}">LINEで送る</a>
+        <button class="sbtn copy" type="button" data-copy="${esc(pairUrl)}">リンクをコピー</button>
+      </div>
+      <div class="copied" aria-live="polite"></div>
+    </section>`:''}
+
+    <section class="panel">
+      <h3>ほかのタイプとの相性を見る</h3>
+      <label class="note" for="cmpSel">相手のタイプを選んでください</label>
+      <select id="cmpSel">${ORDER.map(c=>`<option value="${c}"${c===best?' selected':''}>${c}　${TYPES[c].n}</option>`).join('')}</select>
+      <div id="cmpOut"></div>
+    </section>
+
+    <h2 class="section-h">16タイプ図鑑</h2>
+    <div class="grid16" id="gridRes"></div>
+    ${isMine?`<p style="margin-top:24px"><button class="btn-sub" type="button" data-act="start">もう一度診断する</button></p>`:''}
+  `;
+
+  renderGrid($('gridRes'), mine);
+  v.querySelectorAll('.mcard').forEach(b=>b.onclick=()=>openType(b.dataset.code));
+  v.querySelectorAll('[data-act="start"]').forEach(b=>b.onclick=startQuiz);
+  v.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyText(b.dataset.copy, b.closest('.panel').querySelector('.copied')));
+  const img=v.querySelector('[data-act="img"]'); if(img) img.onclick=()=>makeImage(code);
+  const sel=$('cmpSel');
+  const upd=()=>{ $('cmpOut').innerHTML = compatHTML(code, sel.value, isMine?'あなた':'このタイプ', '相手'); };
+  sel.onchange=upd; upd();
+  show('result');
+}
+
+function copyText(text, out){
+  const fail = ()=>{ out.textContent='コピーできませんでした。リンクを長押ししてコピーしてください：'+text; };
+  try{ navigator.clipboard.writeText(text).then(()=>{ out.textContent='コピーしました'; setTimeout(()=>out.textContent='',2000); }, fail); }catch(e){ fail(); }
+}
+
+// ===== シェア画像 =====
+async function makeImage(code){
+  const t=TYPES[code], best=TYPES[bestOf(code)];
+  const chipText = AXES.map(a=>a.l.join('')).join('');
+  try{ await Promise.all([
+    document.fonts.load('80px "Dela Gothic One"', t.n+best.n+'仕事16タイプ診断わたしの最高の相棒は'+code),
+    document.fonts.load('700 40px "Zen Kaku Gothic New"', t.c+chipText+'「」#あなたは何タイプ？')]); }catch(e){}
+  const W=1080,H=1350, cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const g=cv.getContext('2d');
+  const col = IMG_COL[code.slice(0,2)];
+  g.fillStyle=col; g.fillRect(0,0,W,H);
+  g.fillStyle='rgba(255,255,255,.08)';
+  [[920,180,260],[120,1180,320],[980,1100,120]].forEach(([x,y,r])=>{g.beginPath();g.arc(x,y,r,0,7);g.fill();});
+  const cx=70, cy=150, cw=W-140, ch=H-300;
+  g.fillStyle='#FFFFFF'; roundRect(g,cx,cy,cw,ch,48); g.fill();
+  g.textAlign='center'; g.textBaseline='alphabetic';
+  g.fillStyle='#FFFFFF'; g.font='40px "Dela Gothic One", sans-serif';
+  g.fillText('仕事16タイプ診断', W/2, 105);
+  g.fillStyle='#5E6B84'; g.font='700 40px "Zen Kaku Gothic New", sans-serif';
+  g.fillText('わたしの仕事タイプは', W/2, cy+130);
+  g.fillStyle=col;
+  let fs=130; g.font=`${fs}px "Dela Gothic One", sans-serif`;
+  while(g.measureText(t.n).width>cw-100 && fs>60){ fs-=4; g.font=`${fs}px "Dela Gothic One", sans-serif`; }
+  g.fillText(t.n, W/2, cy+300);
+  g.fillStyle='#14213D'; g.font='700 46px "Zen Kaku Gothic New", sans-serif';
+  wrapText(g,'「'+t.c+'」', W/2, cy+400, cw-120, 64);
+  const bw=150, gap=24, sx=W/2-(bw*4+gap*3)/2;
+  code.split('').forEach((c,i)=>{
+    const x=sx+i*(bw+gap), y=cy+520;
+    g.fillStyle=col; roundRect(g,x,y,bw,130,28); g.fill();
+    g.fillStyle='#FFFFFF'; g.font='64px "Dela Gothic One", sans-serif'; g.fillText(c,x+bw/2,y+80);
+    g.font='700 22px "Zen Kaku Gothic New", sans-serif'; g.fillText(AXES[i].l[AXES[i].k.indexOf(c)],x+bw/2,y+116);
+  });
+  g.strokeStyle='#DCE3EE'; g.lineWidth=3; g.beginPath(); g.moveTo(cx+80,cy+730); g.lineTo(cx+cw-80,cy+730); g.stroke();
+  g.fillStyle='#5E6B84'; g.font='700 38px "Zen Kaku Gothic New", sans-serif';
+  g.fillText('最高の相棒は', W/2, cy+810);
+  g.fillStyle='#14213D'; let bs=72; g.font=`${bs}px "Dela Gothic One", sans-serif`;
+  while(g.measureText(best.n).width>cw-120 && bs>40){ bs-=4; g.font=`${bs}px "Dela Gothic One", sans-serif`; }
+  g.fillText(best.n, W/2, cy+910);
+  g.fillStyle='#FFFFFF'; g.font='700 34px "Zen Kaku Gothic New", sans-serif';
+  g.fillText('#仕事16タイプ診断　あなたは何タイプ？', W/2, H-70);
+
+  const url=cv.toDataURL('image/png');
+  $('imgOut').innerHTML = `<img class="shareimg" src="${url}" alt="${esc(t.n)}の診断結果画像"><p class="note">画像を長押し（パソコンは右クリック）で保存して、シェアに使ってください。</p>`;
+}
+function roundRect(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+function wrapText(g,text,x,y,maxW,lh){
+  let line='', lines=[];
+  for(const ch of text){ if(g.measureText(line+ch).width>maxW){ lines.push(line); line=ch; } else line+=ch; }
+  lines.push(line);
+  lines.forEach((l,i)=>g.fillText(l,x,y+i*lh));
+}
+
+// ===== ルーティング =====
+let ignoreHash=false;
+function setHash(h){ ignoreHash=true; try{ history.replaceState(null,'','#'+h); }catch(e){ location.hash=h; } setTimeout(()=>ignoreHash=false,0); }
+function route(){
+  const h=location.hash.slice(1);
+  if(h.startsWith('pair-') && CODE_RE.test(h.slice(5))){ pairFrom=h.slice(5); renderHome(); show('home'); return; }
+  if(CODE_RE.test(h)){ renderResult(h, h===mine); return; }
+  renderHome(); show('home');
+}
+window.addEventListener('hashchange',()=>{ if(!ignoreHash) route(); });
+$('startBtn').onclick=startQuiz;
+$('backBtn').onclick=()=>{ if(qi>0){ qi--; renderQ(); } };
+$('logo').onclick=()=>{ try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} pairFrom=null; renderHome(); show('home'); };
+document.addEventListener('keydown',e=>{
+  if($('v-quiz').hidden) return;
+  if(e.key==='1'||e.key==='2'){ const b=$('opt'+(+e.key-1)); if(b) b.click(); }
+});
+route();
+</script>
+
+</body>
+</html>
